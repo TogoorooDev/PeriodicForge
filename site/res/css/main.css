@@ -12,17 +12,25 @@ h4{
 	font-family: Verdana, Geneva, sans-serif
 }
 
-.fossText{
+#fossText{
 	font-family: Verdana, Geneva, sans-serif
 	color: black;
 	text-decoration: none;
 	font-style: italic;
 }
 
-.fossText:hover {
+#fossText:hover {
 	text-decoration: underline;
 }
 
-.fossText:visited{
+#fossText:visited{
 	color: black;
+}
+
+#titleText {
+	text-align: center;
+}
+
+#authorText {
+	text-align: center;
 }
