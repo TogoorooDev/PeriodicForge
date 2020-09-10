@@ -1,19 +1,13 @@
-h1{
-	font-family: Verdana, Geneva, sans-serif
-}
-h2{
-	font-family: Verdana, Geneva, sans-serif
+body {
+	margin: 0;
+	padding: 0;
 }
 
-h3{
-	font-family: Verdana, Geneva, sans-serif
-}
-h4{
-	font-family: Verdana, Geneva, sans-serif
+h1, h2, h3, h4, #fossText{
+	font-family: Comic Sans, Geneva, sans-serif
 }
 
 #fossText{
-	font-family: Verdana, Geneva, sans-serif
 	color: black;
 	text-decoration: none;
 	font-style: italic;
@@ -33,4 +27,9 @@ h4{
 
 #authorText {
 	text-align: center;
+}
+
+canvas {
+	display: block;
+	background: blue;
 }

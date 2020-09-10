@@ -13,45 +13,14 @@
 	<h3 id="authorText">Written by Sadie Hensley</h3>
 	<h3><a id="fossText" href="https://github.com/TogoorooDev/PeriodicForge" target="_blank">Proudly Free and Open Source</a></h3>
 
+	<canvas id="gameWindow" ></canvas>
 	<script type="application/javascript">
-		let type = "WebGL";
-
-		if (!PIXI.utils.isWebGLSupported()){
-			type = "canvas";
-		}
-		PIXI.utils.sayHello("canvas");
-
-		let app = new PIXI.Application({
-			width: 256,
-			height: 256,
-			antialias: true,
-			transparent: false,
-			resolution: 1,
-			forceCanvas: false
-			}
-		);
-		document.body.appendChild(app.view);
-
-		app.renderer.backgroundColor = 0xDEDEDE;
-
-		PIXI.Loader.shared
-			.add("res/img/bens-face-smallest.PNG")
-			.load(setup)
-
-		function setup(){
-			console.log("About to load sprite");
-			let benshap = new PIXI.Sprite(
-				PIXI.Loader.shared.resources["res/img/bens-face-smallest.PNG"].texture
-			);
-
-			console.log("About to append Child");
-
-			app.stage.addChild(benshap);
-
-			console.log("All done!");
-		}
-
-
+		const canvas = document.querySelector("#gameWindow");
+		const app = new PIXI.Application({
+			view: canvas,
+			width: window.innerWidth,
+			height: window.innerHeight,
+		});
 	</script>
 
 </body>
