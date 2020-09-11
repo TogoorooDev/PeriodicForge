@@ -4,44 +4,29 @@ const app = new PIXI.Application({
 	view: canvas,
 	width: window.innerWidth,
 	height: window.innerHeight,
-
+	antialias: true
 });
 
-let loader = PIXI.Loader.shared;
-loader.add("res/img/bens-face.png");
-loader.load();
+let graphic = new PIXI.Graphics();
+graphic.x = app.renderer.width / 2;
+graphic.y = app.renderer.height / 2;
 
-var ben;
+graphic.lineStyle(10, 0xffff00);
+graphic.beginFill(0xff0000);
 
-loader.onComplete.add(handleLoaderComplete);
-loader.onProgress.add(handleLoaderProgess);
+graphic.moveTo(0, 0);
+graphic.lineTo(100, 100);
 
-function handleLoaderComplete() {
-	let texture = loader.resources["res/img/bens-face.png"].texture;
-	ben = new PIXI.Sprite(texture);
-	ben.anchor.x = 0.5;
-	ben.anchor.y = 0.5;
+graphic.bezierCurveTo(-200, 200, -200, 100, 0, 0);
 
-	app.stage.addChild(ben);
-	app.ticker.add(animate);
+graphic.closePath();
 
-}
+graphic.endFill();
 
-function handleLoaderProgess(loader, resource){
-	console.log(loader.progress + "% Loaded");
-}
+app.stage.addChild(graphic);
 
-function handleLoadError(){
-	console.log('Texture load error');
-}
-
-function handleLoadAsset(){
-	console.log("Asset Loaded");
-}
+app.ticker.add(animate);
 
 function animate(){
-	ben.x = app.renderer.screen.width / 2;
-	ben.y = app.renderer.screen.height / 2;
 
-	ben.rotation += 0.1;
 }
