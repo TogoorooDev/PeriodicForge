@@ -1,52 +1,47 @@
-function resize(){
-	_w = window.innerWidth;
-	_h = window.innerHeight;
-
-	renderer.resize(_w, _h);
-}
-
 const canvas = document.querySelector("#gameWindow");
-// const app = new PIXI.Application({
-// 	view: canvas,
-// 	width: window.innerWidth,
-// 	height: window.innerHeight,
-// });
 
-let _w = window.innerWidth;
-let _h = window.innerHeight;
-
-const renderer = new PIXI.Renderer({
+const app = new PIXI.Application({
 	view: canvas,
-	width: _w,
-	height: _h,
-	resolution: window.devicePixelRatio,
-	autoDensity: true
+	width: window.innerWidth,
+	height: window.innerHeight,
+
 });
 
-window.addEventListener("resize", resize);
+let loader = PIXI.Loader.shared;
+loader.add("res/img/bens-face.png");
+loader.load();
 
-const stage = new PIXI.Container();
+var ben;
 
-const texture = PIXI.Texture.from("res/img/bens-face.png");
-const img = new PIXI.Sprite(texture);
+loader.onComplete.add(handleLoaderComplete);
+loader.onProgress.add(handleLoaderProgess);
 
-img.x = renderer.width / 2;
-img.y = renderer.height / 2;
+function handleLoaderComplete() {
+	let texture = loader.resources["res/img/bens-face.png"].texture;
+	ben = new PIXI.Sprite(texture);
+	ben.anchor.x = 0.5;
+	ben.anchor.y = 0.5;
 
-img.anchor.x = 0.5;
-img.anchor.y = 0.5;
+	app.stage.addChild(ben);
+	app.ticker.add(animate);
 
-stage.addChild(img);
+}
 
-const ticker = new PIXI.Ticker();
-ticker.add(animate);
-ticker.start();
+function handleLoaderProgess(loader, resource){
+	console.log(loader.progress + "% Loaded");
+}
+
+function handleLoadError(){
+	console.log('Texture load error');
+}
+
+function handleLoadAsset(){
+	console.log("Asset Loaded");
+}
 
 function animate(){
-	img.rotation += 0.1;
+	ben.x = app.renderer.screen.width / 2;
+	ben.y = app.renderer.screen.height / 2;
 
-	img.x = renderer.screen.width / 2;
-	img.y = renderer.screen.height / 2;
-
-	renderer.render(stage);
+	ben.rotation += 0.1;
 }
