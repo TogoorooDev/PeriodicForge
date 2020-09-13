@@ -1,4 +1,5 @@
 class Element {
+
 	constructor(eleName, eleSymbol, eleNumber, x, y, color, backgroundColor, fontColor, size) {
 		this.eleName = eleName;
 		this.symbol = eleSymbol;
@@ -10,20 +11,34 @@ class Element {
 		this.fontColor = fontColor;
 		this.size = size;
 		this.selected = false;
-		this.selectObj = null;
+		this.selectObj = this.setupSelect();
 		this.eleContainer = new PIXI.Container();
 		this.eleContainer.interactive = true;
 		this.eleContainer.buttonMode = true;
 		this.eleContainer.on("pointerdown", this.clickhandler);
+		app.stage.addChild(this.selectObj);
 	}
 
-	clickhandler(){
+	setupSelect(){
+
+
+		let outline = new PIXI.Graphics();
+		outline.lineStyle(3.5, 0xff0000);
+		outline.drawRect(this.x - 3.5, this.y - 3.5, this.size + 6, this.size + 6);
+		outline.visible = false;
+
+		return outline
+	}
+
+	clickhandler(event){
 		if (!this.selected){
-			console.log(`${this.symbol} selected!`);
+			console.log(this);
+			console.log(event);
 			this.selected = true;
+			this.selectObj.visible = true;
 		}else{
-			console.log(`${this.eleName} deselected!`);
 			this.selected = false;
+			this.selectObj.visible = false;
 		}
 	}
 
@@ -34,23 +49,19 @@ class Element {
 
 			return fontsize;
 		}
-
 		function calculateSymXPos(x, width, size){
 			let offset = (size - width) / 2; 			
 			return x + offset;
 		}
-
 		function calculateNameFontSize(givensize, width){
 				let fontsize = givensize * 0.2;
 
 				return fontsize;
 		}
-
 		function calculateNameXPos(x, width, size){
 			let offset = (size - width) / 2; 			
 			return x + offset;
 		}
-
 		function calculateNumberFontSize(givensize, width){
 			let fontsize = givensize * 0.25;
 
