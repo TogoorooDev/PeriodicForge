@@ -15,7 +15,7 @@ class Element {
 		this.eleContainer = new PIXI.Container();
 		this.eleContainer.interactive = true;
 		this.eleContainer.buttonMode = true;
-		this.eleContainer.on("pointerdown", this.clickhandler);
+		this.eleContainer.on("pointerdown", this.clickhandler, this);
 		app.stage.addChild(this.selectObj);
 	}
 
@@ -29,16 +29,30 @@ class Element {
 
 		return outline
 	}
-
 	clickhandler(event){
+
 		if (!this.selected){
-			console.log(this);
-			console.log(event);
-			this.selected = true;
-			this.selectObj.visible = true;
+			if (selectorLock){
+				this.selected = false;
+				this.selectObj.visible = false;
+				console.log(selectorLock);
+				selectedThings[1] = this;
+				combine();
+			}else{
+				console.log(selectorLock);
+				selectorLock = true;
+				this.selected = true;
+				this.selectObj.visible = true;
+				selectedThings[0] = this;
+
+			}
 		}else{
+			console.log(selectorLock);
+			selectorLock = false;
 			this.selected = false;
 			this.selectObj.visible = false;
+			selectedThings[0] = null;
+			
 		}
 	}
 

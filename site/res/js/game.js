@@ -21,6 +21,9 @@ let water = new Element("Water", "Wt", "2", 150, 100, 0x589ffc, 0x83eefc, 0x0000
 let sky = new Element("Air", "Ai", "3", 250, 100, 0x589ffc, 0x83eefc, 0x000000, 75);
 let fire = new Element("Fire", "Fr", "4", 350, 100, 0xfc8f1b, 0xfcbe7b, 0xFFFFFF, 75);
 
+var selectorLock = false;
+var selectedThings = [];
+
 earth.renderElement();
 water.renderElement();
 sky.renderElement();
@@ -34,6 +37,10 @@ function resize(){
 	_w = window.innerWidth;
 	_h = window.innerHeight;
 	app.renderer.resize(_w, _h);
+}
+
+function combine(){
+	console.log(selectedThings);
 }
 
 function draw(){
