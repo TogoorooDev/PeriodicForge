@@ -26,26 +26,14 @@ class Element {
 		outline.lineStyle(3.5, 0xff0000);
 		outline.drawRect(this.x - 3.5, this.y - 3.5, this.size + 6, this.size + 6);
 		outline.visible = false;
-
-		return outline
+		return outline;
+		
 	}
 	clickhandler(event){
 
 		if (!this.selected){
-			if (selectorLock){
-				this.selected = false;
-				this.selectObj.visible = false;
-				console.log(selectorLock);
-				selectedThings[1] = this;
-				combine();
-			}else{
-				console.log(selectorLock);
-				selectorLock = true;
-				this.selected = true;
-				this.selectObj.visible = true;
-				selectedThings[0] = this;
-
-			}
+			this.select();
+		
 		}else{
 			console.log(selectorLock);
 			selectorLock = false;
@@ -54,6 +42,31 @@ class Element {
 			selectedThings[0] = null;
 			
 		}
+	}
+
+	select(){
+		if (selectorLock){
+			this.selected = false;
+			this.selectObj.visible = false;
+			console.log(selectorLock);
+			selectedThings[1] = this;
+			combine();
+		}else{
+			console.log(selectorLock);
+			selectorLock = true;
+			this.selected = true;
+			this.selectObj.visible = true;
+			selectedThings[0] = this;
+
+		}
+	}
+
+	deselect(){
+		console.log(selectorLock);
+		selectorLock = false;
+		this.selected = false;
+		this.selectObj.visible = false;
+		selectedThings[0] = null;
 	}
 
 	renderElement(){
