@@ -17,6 +17,9 @@ class Element {
 		this.eleContainer.buttonMode = true;
 		this.eleContainer.on("pointerdown", this.clickhandler, this);
 		app.stage.addChild(this.selectObj);
+
+		this.renderElement()
+		this.hide();
 	}
 
 	setupSelect(){
@@ -30,33 +33,39 @@ class Element {
 		
 	}
 	clickhandler(event){
-
+		console.log(`${this.eleName} Clicked!`);
 		if (!this.selected){
 			this.select();
 		
 		}else{
-			console.log(selectorLock);
+			console.log(`Selector Lock Value: ${selectorLock}\nElement Deselecting`);
 			selectorLock = false;
 			this.selected = false;
 			this.selectObj.visible = false;
-			selectedThings[0] = null;
+			console.log(this);
+			//selectedThings[0] = null;
 			
 		}
 	}
 
 	select(){
 		if (selectorLock){
+			console.log(`Selector Lock Value: ${selectorLock}\nElement Selecting\nProper Value: true`);
 			this.selected = false;
 			this.selectObj.visible = false;
-			console.log(selectorLock);
+			//console.log(selectorLock);
 			selectedThings[1] = this;
+			selectorLock = false;
+			console.log(this);
 			combine();
 		}else{
-			console.log(selectorLock);
+			console.log(`Selector Lock Value: ${selectorLock}\nElement Selecting\nProper Value: false`);
 			selectorLock = true;
 			this.selected = true;
 			this.selectObj.visible = true;
 			selectedThings[0] = this;
+			console.log(this);
+			outside = this;
 
 		}
 	}

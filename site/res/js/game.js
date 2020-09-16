@@ -5,6 +5,8 @@ console.log("Working!");
 let _w = window.innerWidth;
 let _h = window.innerHeight;
 
+let outside = null;
+
 //let aether = new Element("Aether", "Ae", "5", 450, 100, 0x3f3f3f, 0x000000, 0xFFFFFF, 75);
 
 const app = new PIXI.Application({
@@ -26,12 +28,17 @@ let steam = new Element("Steam", "Sm", "5", 450, 100, 0x161616, 0x666666, 0xFFFF
 var selectorLock = false;
 var selectedThings = [];
 
-earth.renderElement();
-water.renderElement();
-sky.renderElement();
-fire.renderElement();
-steam.renderElement();
-//aether.renderElement();
+earth.show();
+water.show();
+sky.show();
+fire.show();
+
+console.log(selectedThings);
+console.log(selectedThings);
+console.log(selectedThings);
+console.log(selectedThings);
+console.log(selectedThings);
+
 
 app.ticker.add(resize);
 //app.ticker.add(draw);
@@ -44,10 +51,16 @@ function resize(){
 
 function combine(){
 	console.log(selectedThings);
-	selectedThings[0] = null;
-	selectedThings[1] = null;
+	selectedThings[0].deselect();
+	selectedThings[1].deselect();
+
+	if (selectedThings[0].id == "2" && selectedThings[1].id == "4"){
+		fire.show();
+	}
+
+	// selectedThings[0] = null;
+	// selectedThings[1] = null;
 }
 
 function draw(){
-
 }
