@@ -1,9 +1,20 @@
-const elementList = `[{
-	"snum": 2,
-	"bnum": 4,
-	"name": "Steam",
-	"symbol": "St",
-	"number": 5,
-	"colorScheme": 2,
-	"size": 75
-}]`
+const parseElementList = `[{
+		"snum": 2,
+		"bnum": 4,
+		"name": "Steam",
+		"symbol": "St",
+		"number": 5,
+		"colorScheme": 2,
+		"size": 75
+	},
+	{
+		"snum": 1,
+		"bnum": 5,
+		"name": "Smoke",
+		"symbol": "Sk",
+		"number": 6,
+		"colorScheme": 5,
+		"size": 75
+	}
+
+	]`

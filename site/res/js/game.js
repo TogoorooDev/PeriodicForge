@@ -22,36 +22,35 @@ var elements = [];
 
 // const brownColorScheme = new ColorScheme(0x7c7368, 0x594f45, 0xFFFFFF);
 // const lightBlueColorScheme = new ColorScheme(0x589ffc, 0x83eefc, 0x000000);
-                        /*Name, Symbol, Number, X, Y, Color Scheme,             Size*/  
-elements[0] = new Element("Earth", "Er", "1", 50, 100, ColorScheme.colorSchemes[0], 75);
-elements[1] = new Element("Water", "Wt", "2", 150, 100, ColorScheme.colorSchemes[1], 75);
-elements[2] = new Element("Air", "Ai", "3", 250, 100, ColorScheme.colorSchemes[1], 75);
-elements[3] = new Element("Fire", "Fr", "4", 350, 100, ColorScheme.colorSchemes[3], 75);
 
-// const elist = JSON.parse(elementParseList);
+elementList = new ElementContainer();
 
-// console.log(elist[0].symbol);
+                           /*Name, Symbol, Number, X, Y, Color Scheme,             Size*/  
+elementList.add(new Element("Earth", "Er", "1", 50, 100, ColorScheme.colorSchemes[0], 75));
+elementList.add(new Element("Water", "Wt", "2", 150, 100, ColorScheme.colorSchemes[1], 75));
+elementList.add(new Element("Air", "Ai", "3", 250, 100, ColorScheme.colorSchemes[1], 75));
+elementList.add(new Element("Fire", "Fr", "4", 350, 100, ColorScheme.colorSchemes[3], 75));
 
-let newElements = JSON.parse(elementList);
+// elements[0] = new Element("Earth", "Er", "1", 50, 100, ColorScheme.colorSchemes[0], 75);
+// elements[1] = new Element("Water", "Wt", "2", 150, 100, ColorScheme.colorSchemes[1], 75);
+// elements[2] = new Element("Air", "Ai", "3", 250, 100, ColorScheme.colorSchemes[1], 75);
+// elements[3] = new Element("Fire", "Fr", "4", 350, 100, ColorScheme.colorSchemes[3], 75);
+
+let newElements = JSON.parse(parseElementList);
 newElements.forEach((out) => {
 	// console.log(out.name);
-	elements.push(new Element(out.name, out.symbol, out.number, 450, 100, ColorScheme.colorSchemes[out.colorScheme], 75, out.snum, out.bnum));
+	elementList.add(new Element(out.name, out.symbol, out.number, 450, 100, ColorScheme.colorSchemes[out.colorScheme], 75, out.snum, out.bnum));
 })
-
-// elements[0] = new Element("Earth", "Er", "1", 50, 100, 0x7c7368, 0x594f45, 0xFFFFFF, 75);
-// elements[1] = new Element("Water", "Wt", "2", 150, 100, 0x589ffc, 0x83eefc, 0x000000, 75);
-// elements[2] = new Element("Air", "Ai", "3", 250, 100, 0x589ffc, 0x83eefc, 0x000000, 75);
-// elements[3] = new Element("Fire", "Fr", "4", 350, 100, 0xfc8f1b, 0xfcbe7b, 0xFFFFFF, 75);
-// elements[4] = new Element("Steam", "Sm", "5", 450, 100, 0x454545, 0x666666, 0xFFFFFF, 75);
-
 
 var selectorLock = false;
 var selectedThings = [];
 
-elements[0].show();
-elements[1].show();
-elements[2].show();
-elements[3].show();
+elementList.get(1)?.show();
+elementList.get(2)?.show();
+elementList.get(3)?.show();
+elementList.get(4)?.show();
+elementList.get(5)?.show();
+
 
 app.ticker.add(resize);
 //app.ticker.add(draw);
@@ -69,10 +68,6 @@ function combine(){
 		let buffer = selectedThings[1];
 		selectedThings[1] = selectedThings[0];
 		selectedThings[0] = buffer;
-	}
-
-	if (selectedThings[0].number == "2" && selectedThings[1].number == "4"){
-		elements[4].show();
 	}
 
 	selectedThings[0].deselect();
