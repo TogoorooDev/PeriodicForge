@@ -1,14 +1,12 @@
 class Element {
 
-	constructor(eleName, eleSymbol, eleNumber, x, y, color, backgroundColor, fontColor, size) {
+	constructor(eleName, eleSymbol, eleNumber, x, y, clrScheme, size) {
 		this.eleName = eleName;
 		this.symbol = eleSymbol;
 		this.number = eleNumber;
 		this.x = x;
 		this.y = y;
-		this.color = color;
-		this.backgroundColor = backgroundColor;
-		this.fontColor = fontColor;
+		this.colorScheme = clrScheme;
 		this.size = size;
 		this.selected = false;
 		this.selectObj = this.setupSelect();
@@ -38,11 +36,11 @@ class Element {
 			this.select();
 		
 		}else{
-			console.log(`Selector Lock Value: ${selectorLock}\nElement Deselecting`);
+			//console.log(`Selector Lock Value: ${selectorLock}\nElement Deselecting`);
 			selectorLock = false;
 			this.selected = false;
 			this.selectObj.visible = false;
-			console.log(this);
+			//console.log(this);
 			//selectedThings[0] = null;
 			
 		}
@@ -50,28 +48,29 @@ class Element {
 
 	select(){
 		if (selectorLock){
-			console.log(`Selector Lock Value: ${selectorLock}\nElement Selecting\nProper Value: true`);
+			//console.log(`Selector Lock Value: ${selectorLock}\nElement Selecting\nProper Value: true`);
 			this.selected = false;
 			this.selectObj.visible = false;
 			//console.log(selectorLock);
 			selectedThings[1] = this;
 			selectorLock = false;
-			console.log(this);
+			//console.log(this);
 			combine();
 		}else{
-			console.log(`Selector Lock Value: ${selectorLock}\nElement Selecting\nProper Value: false`);
+			//console.log(`Selector Lock Value: ${selectorLock}\nElement Selecting\nProper Value: false`);
 			selectorLock = true;
 			this.selected = true;
 			this.selectObj.visible = true;
 			selectedThings[0] = this;
-			console.log(this);
+			//console.log(this);
 			outside = this;
 
 		}
 	}
 
 	deselect(){
-		console.log(selectorLock);
+		//console.log(selectorLock);
+		//console.log("Deselecting...");
 		selectorLock = false;
 		this.selected = false;
 		this.selectObj.visible = false;
@@ -106,8 +105,8 @@ class Element {
 
 		//render box
 		let elementBox = new PIXI.Graphics();
-		elementBox.lineStyle(3.5, this.color);
-		elementBox.beginFill(this.backgroundColor)
+		elementBox.lineStyle(3.5, this.colorScheme.borderColor);
+		elementBox.beginFill(this.colorScheme.backgroundColor);
 		elementBox.drawRect(this.x, this.y, this.size, this.size);
 		elementBox.endFill();
 		
@@ -116,7 +115,7 @@ class Element {
 		//render symbol text
 		let symText = new PIXI.Text(this.symbol);
 		symText.style = new PIXI.TextStyle({
-			fill: this.fontColor,
+			fill: this.colorScheme.fontColor,
 			fontFamily: "Helvetica",
 			fontWeight: 900,
 			fontSize: calculateSymFontSize(this.size)
@@ -128,7 +127,7 @@ class Element {
 		//render name
 		let name = new PIXI.Text(this.eleName);
 		name.style = new PIXI.TextStyle({
-			fill: this.fontColor,
+			fill: this.colorScheme.fontColor,
 			fontFamily: "\"Trebuchet MS\", Helvetica, sans-serif",
 			wordWrap: true,
 			fontSize: calculateNameFontSize(this.size, name.width)
@@ -141,7 +140,7 @@ class Element {
 		//render number
 		let number = new PIXI.Text(this.number);
 		number.style = new PIXI.TextStyle({
-			fill: this.fontColor,
+			fill:this.colorScheme.fontColor,
 			fontFamily: "\"Trebuchet MS\", Helvetica, sans-serif",
 			fontSize: calculateNumberFontSize(this.size, number.width)
 		});
