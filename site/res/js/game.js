@@ -49,7 +49,6 @@ elementList.get(1)?.show();
 elementList.get(2)?.show();
 elementList.get(3)?.show();
 elementList.get(4)?.show();
-elementList.get(5)?.show();
 
 
 app.ticker.add(resize);
@@ -63,15 +62,19 @@ function resize(){
 
 function combine(){
 	//console.log(selectedThings);
-
+	let low, high;
 	if (selectedThings[0].number > selectedThings[1].number){
-		let buffer = selectedThings[1];
-		selectedThings[1] = selectedThings[0];
-		selectedThings[0] = buffer;
+		low = selectedThings[1].number;
+		high = selectedThings[0].number;
+	}else{
+		low = selectedThings[0].number;
+		high = selectedThings[1].number;
 	}
 
 	selectedThings[0].deselect();
 	selectedThings[1].deselect();
+
+	elementList.getCompatable(low, high)?.show();
 
 	// selectedThings[0] = null;
 	// selectedThings[1] = null;

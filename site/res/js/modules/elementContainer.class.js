@@ -30,7 +30,14 @@ class ElementContainer{
 	}
 
 	getCompatable(ltr, htr){
+		let ret = null;
+		this.internelElementArray.forEach(item => {
+			if (item.lowTrigger == ltr && item.highTrigger == htr){
+				ret = item;
+			}
+		});
 
+		return ret;
 	}
 
 }
