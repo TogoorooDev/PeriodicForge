@@ -28,6 +28,16 @@ elements[1] = new Element("Water", "Wt", "2", 150, 100, ColorScheme.colorSchemes
 elements[2] = new Element("Air", "Ai", "3", 250, 100, ColorScheme.colorSchemes[1], 75);
 elements[3] = new Element("Fire", "Fr", "4", 350, 100, ColorScheme.colorSchemes[3], 75);
 
+// const elist = JSON.parse(elementParseList);
+
+// console.log(elist[0].symbol);
+
+let newElements = JSON.parse(elementList);
+newElements.forEach((out) => {
+	// console.log(out.name);
+	elements.push(new Element(out.name, out.symbol, out.number, 450, 100, ColorScheme.colorSchemes[out.colorScheme], 75, out.snum, out.bnum));
+})
+
 // elements[0] = new Element("Earth", "Er", "1", 50, 100, 0x7c7368, 0x594f45, 0xFFFFFF, 75);
 // elements[1] = new Element("Water", "Wt", "2", 150, 100, 0x589ffc, 0x83eefc, 0x000000, 75);
 // elements[2] = new Element("Air", "Ai", "3", 250, 100, 0x589ffc, 0x83eefc, 0x000000, 75);

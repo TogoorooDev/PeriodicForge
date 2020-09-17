@@ -1,15 +1,9 @@
-{
-	"1": [{
-		"snum": 2,
-		"bnum": 4,
-		"name": "Steam",
-		"symbol": "St",
-		"number": 5,
-		"colorScheme": 2,
-		"size": 75
-	},
-	{
-		"snum": 
-	}
-	]
-}
+const elementList = `[{
+	"snum": 2,
+	"bnum": 4,
+	"name": "Steam",
+	"symbol": "St",
+	"number": 5,
+	"colorScheme": 2,
+	"size": 75
+}]`

@@ -1,6 +1,6 @@
 class Element {
 
-	constructor(eleName, eleSymbol, eleNumber, x, y, clrScheme, size) {
+	constructor(eleName, eleSymbol, eleNumber, x, y, clrScheme, size, lowTrigger = null, highTrigger = null) {
 		this.eleName = eleName;
 		this.symbol = eleSymbol;
 		this.number = eleNumber;
@@ -15,6 +15,9 @@ class Element {
 		this.eleContainer.buttonMode = true;
 		this.eleContainer.on("pointerdown", this.clickhandler, this);
 		app.stage.addChild(this.selectObj);
+
+		this.lowTrigger = lowTrigger;
+		this.highTrigger = highTrigger;
 
 		this.renderElement()
 		this.hide();
