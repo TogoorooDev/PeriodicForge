@@ -15,6 +15,33 @@ const parseElementList = `[{
 		"number": 6,
 		"colorScheme": 5,
 		"size": 75
+	},
+	{
+		"snum": 2,
+		"bnum": 3,
+		"name": "Vapor",
+		"symbol": "Wv",
+		"number": "7",
+		"colorScheme": 1,
+		"size": 75
+	},
+	{
+		"snum": 1,
+		"bnum": 2,
+		"name": "Life",
+		"symbol": "Lf",
+		"number": "8",
+		"colorScheme": 4,
+		"size": 75
+	},
+	{
+		"snum": 4,
+		"bnum": 8,
+		"name": "Death",
+		"symbol": "De",
+		"number": 9,
+		"colorScheme": 2,
+		"size": 75
 	}
 
 	]`

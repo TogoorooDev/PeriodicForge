@@ -15,6 +15,7 @@ const app = new PIXI.Application({
 	height: _h,
 	antialias: true,
 	autoDensity: true,
+	resolution: 2,
 	backgroundColor: 0xdddddd
 });
 
@@ -25,21 +26,24 @@ var elements = [];
 
 elementList = new ElementContainer();
 
-                           /*Name, Symbol, Number, X, Y, Color Scheme,             Size*/  
-elementList.add(new Element("Earth", "Er", "1", 50, 100, ColorScheme.colorSchemes[0], 75));
-elementList.add(new Element("Water", "Wt", "2", 150, 100, ColorScheme.colorSchemes[1], 75));
-elementList.add(new Element("Air", "Ai", "3", 250, 100, ColorScheme.colorSchemes[1], 75));
-elementList.add(new Element("Fire", "Fr", "4", 350, 100, ColorScheme.colorSchemes[3], 75));
+posHandler = new PositionSystem(new Pos(50, 100), 100);
 
-// elements[0] = new Element("Earth", "Er", "1", 50, 100, ColorScheme.colorSchemes[0], 75);
-// elements[1] = new Element("Water", "Wt", "2", 150, 100, ColorScheme.colorSchemes[1], 75);
-// elements[2] = new Element("Air", "Ai", "3", 250, 100, ColorScheme.colorSchemes[1], 75);
-// elements[3] = new Element("Fire", "Fr", "4", 350, 100, ColorScheme.colorSchemes[3], 75);
+                           /*Name, Symbol, Number, X, Y, Color Scheme,             Size*/  
+// elementList.add(new Element("Earth", "Er", "1", new Pos(50, 100), ColorScheme.colorSchemes[0], 75));
+// elementList.add(new Element("Water", "Wt", "2", new Pos(150, 100), ColorScheme.colorSchemes[1], 75));
+// elementList.add(new Element("Air", "Ai", "3", new Pos(250, 100), ColorScheme.colorSchemes[1], 75));
+// elementList.add(new Element("Fire", "Fr", "4", new Pos(350, 100), ColorScheme.colorSchemes[3], 75));
+
+                           /*Name, Symbol, Number, X, Y, Color Scheme,             Size*/  
+elementList.add(new Element("Earth", "Er", "1", posHandler.getPos(), ColorScheme.colorSchemes[0], 75));
+elementList.add(new Element("Water", "Wt", "2", posHandler.getPos(), ColorScheme.colorSchemes[1], 75));
+elementList.add(new Element("Air", "Ai", "3", posHandler.getPos(), ColorScheme.colorSchemes[1], 75));
+elementList.add(new Element("Fire", "Fr", "4", posHandler.getPos(), ColorScheme.colorSchemes[3], 75));
 
 let newElements = JSON.parse(parseElementList);
 newElements.forEach((out) => {
 	// console.log(out.name);
-	elementList.add(new Element(out.name, out.symbol, out.number, 450, 100, ColorScheme.colorSchemes[out.colorScheme], 75, out.snum, out.bnum));
+	elementList.add(new Element(out.name, out.symbol, out.number, posHandler.getPos(), ColorScheme.colorSchemes[out.colorScheme], 75, out.snum, out.bnum));
 })
 
 var selectorLock = false;
@@ -58,6 +62,9 @@ function resize(){
 	_w = window.innerWidth;
 	_h = window.innerHeight;
 	app.renderer.resize(_w, _h);
+	//console.log(app.renderer.screen.width);
+
+	
 }
 
 function combine(){

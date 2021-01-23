@@ -1,11 +1,11 @@
 class Element {
 
-	constructor(eleName, eleSymbol, eleNumber, x, y, clrScheme, size, lowTrigger = null, highTrigger = null) {
+	constructor(eleName, eleSymbol, eleNumber, position, clrScheme, size, lowTrigger = null, highTrigger = null) {
 		this.eleName = eleName;
 		this.symbol = eleSymbol;
 		this.number = eleNumber;
-		this.x = x;
-		this.y = y;
+		this.x = position.x;
+		this.y = position.y;
 		this.colorScheme = clrScheme;
 		this.size = size;
 		this.selected = false;
@@ -106,6 +106,12 @@ class Element {
 			return fontsize;
 		}
 
+		function calculateSymYPos(y, height, size) {
+			let offset = (size - height) / 2; 	
+			//console.log(`Y: ${y}\nNewY: ${}`)		
+			return y + offset;
+		}
+
 		//render box
 		let elementBox = new PIXI.Graphics();
 		elementBox.lineStyle(3.5, this.colorScheme.borderColor);
@@ -124,7 +130,7 @@ class Element {
 			fontSize: calculateSymFontSize(this.size)
 		});
 		symText.x = calculateSymXPos(this.x, symText.width, this.size);
-		symText.y = this.y;
+		symText.y = calculateSymYPos(this.y, symText.height, this.size);
 		this.eleContainer.addChild(symText);
 
 		//render name
